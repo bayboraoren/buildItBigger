@@ -8,4 +8,6 @@ jokes/jokes.iml
 app/app.iml
 .DS_Store
 /build
+/javaLibrary/javaLibrary.iml
 /captures
+
