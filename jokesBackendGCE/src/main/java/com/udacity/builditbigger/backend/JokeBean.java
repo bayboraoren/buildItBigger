@@ -4,7 +4,7 @@ package com.udacity.builditbigger.backend;
 public class JokeBean {
 
     private String jokeData;
-    private String errorMesage="NO ERROR";
+    private String errorMesage;
 
     public String getJokeData() {
         return jokeData;
