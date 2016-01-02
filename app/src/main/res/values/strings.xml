@@ -4,4 +4,5 @@
     <string name="button_text">Tell Joke</string>
     <string name="action_settings">Settings</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="job_service_is_not_work">maybe joke service is not work</string>
 </resources>
