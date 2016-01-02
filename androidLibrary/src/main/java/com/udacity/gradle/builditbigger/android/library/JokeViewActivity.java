@@ -15,10 +15,6 @@ public class JokeViewActivity extends ActionBarActivity {
     public static final String INTENT_EXTRA_PARAM_FOR_JOKE
             = "com.udacity.gradle.builditbigger.android.library.INTENT_EXTRA_PARAM_FOR_JOKE";
 
-    public static final String INTENT_EXTRA_PARAM_FOR_JOKE_ERROR_MESSAGE
-            = "com.udacity.gradle.builditbigger.android.library.INTENT_EXTRA_PARAM_FOR_JOKE_ERROR_MESSAGE";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

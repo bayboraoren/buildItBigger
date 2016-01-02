@@ -31,13 +31,6 @@ public class JokeViewActivityFragment extends Fragment {
             jokeTextView.setText(i.getStringExtra(JokeViewActivity.INTENT_EXTRA_PARAM_FOR_JOKE));
         }
 
-        //for joke error message
-        if (i != null && i.hasExtra(JokeViewActivity.INTENT_EXTRA_PARAM_FOR_JOKE_ERROR_MESSAGE)) {
-            TextView jokeErrorMessageTextView = (TextView) rootView.findViewById(R.id.joke_error_message_text);
-            jokeErrorMessageTextView.setText(i.getStringExtra(JokeViewActivity.INTENT_EXTRA_PARAM_FOR_JOKE_ERROR_MESSAGE));
-        }
-
-
         return rootView;
     }
 }

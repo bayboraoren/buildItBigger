@@ -1,20 +1,25 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.udacity.builditbigger.backend.jokeApi.model.JokeBean;
+import com.udacity.gradle.builditbigger.android.library.JokeViewActivity;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements BaseView{
+
 
     public MainActivityFragment() {
     }
@@ -22,6 +27,9 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final MainActivityFragment instance = this;
+
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
@@ -38,10 +46,22 @@ public class MainActivityFragment extends Fragment {
         tellJokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new JokeEndpointsAsyncTask(getActivity()).execute();
+                new JokeEndpointsAsyncTask(instance).execute();
             }
         });
 
         return root;
+    }
+
+    @Override
+    public void showJoke(JokeBean jokeBean) {
+        Intent i = new Intent(getContext(), JokeViewActivity.class);
+        i.putExtra(JokeViewActivity.INTENT_EXTRA_PARAM_FOR_JOKE, jokeBean.getJokeData());
+        getContext().startActivity(i);
+    }
+
+    @Override
+    public void showErrorMessage(JokeBean jokeBean) {
+        Toast.makeText(getContext(),jokeBean.getErrorMesage(),Toast.LENGTH_SHORT).show();
     }
 }
