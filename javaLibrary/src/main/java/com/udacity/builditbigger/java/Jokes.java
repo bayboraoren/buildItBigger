@@ -1,4 +1,4 @@
-package com.example;
+package com.udacity.builditbigger.java;
 
 public class Jokes {
 

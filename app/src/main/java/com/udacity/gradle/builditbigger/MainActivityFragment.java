@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.Jokes;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -42,13 +41,9 @@ public class MainActivityFragment extends Fragment {
         tellJokeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Jokes jokes = new Jokes();
-                String joke = jokes.getJoke();
-                Toast.makeText(getActivity(), joke, Toast.LENGTH_SHORT).show();
+                new JokeEndpointsAsyncTask(getActivity()).execute();
             }
         });
-
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this.getActivity(), "Manfred"));
 
         return root;
     }

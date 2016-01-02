@@ -2,28 +2,36 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.util.Pair;
 import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.udacity.builditbigger.backend.myApi.MyApi;
+import com.udacity.builditbigger.backend.jokeApi.JokeApi;
+import com.udacity.builditbigger.backend.jokeApi.model.JokeBean;
 
 import java.io.IOException;
 
 /**
  * Created by baybora on 12/30/15.
  */
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
-    private static MyApi myApiService = null;
+class JokeEndpointsAsyncTask extends AsyncTask<Void, Void, JokeBean> {
+    private static JokeApi jokeApiService = null;
     private Context context;
 
+    //set context to show message from andoid library jokes via gce
+    public JokeEndpointsAsyncTask(Context context){
+        this.context = context;
+    }
+
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
-        if(myApiService == null) {  // Only do this once
-            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+    protected JokeBean doInBackground(Void...params) {
+
+        JokeBean jokeBean  = new JokeBean();
+
+        if(jokeApiService == null) {
+            JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     // options for running against local devappserver
                     // - 10.0.2.2 is localhost's IP address in Android emulator
@@ -36,23 +44,23 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
                             abstractGoogleClientRequest.setDisableGZipContent(true);
                         }
                     });
-            // end options for devappserver
 
-            myApiService = builder.build();
+            jokeApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
-
         try {
-            return myApiService.sayHi(name).execute().getData();
+
+            jokeBean = jokeApiService.getJoke().execute();
+            return jokeBean;
+
         } catch (IOException e) {
-            return e.getMessage();
+            jokeBean.setErrorMesage(e.getMessage());
+            return jokeBean;
         }
     }
 
     @Override
-    protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+    protected void onPostExecute(JokeBean jokeBean) {
+        Toast.makeText(context, jokeBean.getJokeData(), Toast.LENGTH_LONG).show();
     }
 }
