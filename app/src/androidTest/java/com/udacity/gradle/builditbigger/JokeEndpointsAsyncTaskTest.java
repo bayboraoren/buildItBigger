@@ -15,8 +15,9 @@ public class JokeEndpointsAsyncTaskTest extends AndroidTestCase implements BaseV
     private CountDownLatch countDownLatch = new CountDownLatch(1);
 
     public void testGetJokeBean(){
-        JokeEndpointsAsyncTask jokeEndpointsAsyncTask = new JokeEndpointsAsyncTask(this);
-        jokeEndpointsAsyncTask.execute();
+
+        executeJokeAsyncTask();
+
         try {
 
             countDownLatch.await(30, TimeUnit.SECONDS);
@@ -37,5 +38,11 @@ public class JokeEndpointsAsyncTaskTest extends AndroidTestCase implements BaseV
     @Override
     public void showErrorMessage(JokeBean jokeBean) {
         fail(jokeBean.getErrorMesage());
+    }
+
+
+    @Override
+    public void executeJokeAsyncTask() {
+        new JokeEndpointsAsyncTask(this).execute();
     }
 }

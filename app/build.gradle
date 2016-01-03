@@ -17,6 +17,9 @@ android {
         }
     }
     productFlavors {
+        free {
+            applicationId 'com.udacity.gradle.builditbigger.free'
+        }
     }
 }
 

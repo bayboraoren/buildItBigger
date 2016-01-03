@@ -7,6 +7,7 @@ import com.udacity.builditbigger.backend.jokeApi.model.JokeBean;
  */
 public interface BaseView {
 
+    void executeJokeAsyncTask();
     void showJoke(JokeBean jokeBean);
     void showErrorMessage(JokeBean jokeBean);
 
