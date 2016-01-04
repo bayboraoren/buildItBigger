@@ -1,7 +1,10 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.udacity.builditbigger.backend.jokeApi.model.JokeBean;
@@ -11,6 +14,12 @@ import com.udacity.gradle.builditbigger.android.library.JokeViewActivity;
  * Created by baybora on 1/2/16.
  */
 public class BaseActivity extends ActionBarActivity implements BaseView {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
 
     @Override
     public void showJoke(JokeBean jokeBean) {
@@ -29,4 +38,6 @@ public class BaseActivity extends ActionBarActivity implements BaseView {
     public void executeJokeAsyncTask() {
         new JokeEndpointsAsyncTask(this).execute();
     }
+
+
 }

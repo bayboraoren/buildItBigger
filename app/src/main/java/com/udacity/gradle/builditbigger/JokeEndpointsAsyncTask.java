@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by baybora on 12/30/15.
  */
-class JokeEndpointsAsyncTask extends AsyncTask<Void, Void, JokeBean> {
+public class JokeEndpointsAsyncTask extends AsyncTask<Void, Void, JokeBean> {
     private static JokeApi jokeApiService = null;
     private BaseView baseView;
 
