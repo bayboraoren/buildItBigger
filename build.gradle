@@ -17,3 +17,18 @@ allprojects {
         jcenter()
     }
 }
+
+
+//use GCE tasks to run and stop
+task tests {
+    project(":jokesBackendGCE").afterEvaluate { jokesBackendGCE ->
+        //daemon : Specifies whether the local development server should run in the background. When true, this task completes as soon as the server has started. When false, this task blocks until the local development server is stopped (defaults to false).
+        jokesBackendGCE.extensions.appengine.daemon = true
+    }
+    dependsOn ":jokesBackendGCE:appengineRun"
+    finalizedBy ":app:connectedAndroidTest"
+}
+task testTask {
+    dependsOn "tests"
+    finalizedBy ":jokesBackendGCE:appengineStop"
+}
