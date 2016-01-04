@@ -22,6 +22,7 @@ public class MainActivity extends BaseActivity{
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
+                //close interstitial
                 super.onAdClosed();
                 //show joke
                 executeJokeAsyncTask();
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity{
 
     @Override
     public void executeJokeAsyncTask() {
+        //interstitial is not loaded show interstitial else show joke
         if (interstitialAd.isLoaded()) {
             interstitialAd.show();
         } else {
