@@ -45,4 +45,13 @@ public class JokeEndpointsAsyncTaskTest extends AndroidTestCase implements BaseV
     public void executeJokeAsyncTask() {
         new JokeEndpointsAsyncTask(this).execute();
     }
+
+
+    //test not use
+    @Override
+    public void showProgressBar() {}
+
+    //test not use
+    @Override
+    public void hideProgressBar() {}
 }
