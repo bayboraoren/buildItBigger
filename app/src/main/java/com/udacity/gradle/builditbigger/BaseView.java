@@ -10,5 +10,7 @@ public interface BaseView {
     void executeJokeAsyncTask();
     void showJoke(JokeBean jokeBean);
     void showErrorMessage(JokeBean jokeBean);
+    void showProgressBar();
+    void hideProgressBar();
 
 }

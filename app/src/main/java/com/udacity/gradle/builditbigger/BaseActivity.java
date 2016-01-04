@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.udacity.builditbigger.backend.jokeApi.model.JokeBean;
@@ -15,10 +15,20 @@ import com.udacity.gradle.builditbigger.android.library.JokeViewActivity;
  */
 public class BaseActivity extends ActionBarActivity implements BaseView {
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initProgressBar();
+    }
+
+    private void initProgressBar(){
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -40,4 +50,13 @@ public class BaseActivity extends ActionBarActivity implements BaseView {
     }
 
 
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
 }

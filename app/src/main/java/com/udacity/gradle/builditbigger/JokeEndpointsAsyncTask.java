@@ -23,9 +23,18 @@ public class JokeEndpointsAsyncTask extends AsyncTask<Void, Void, JokeBean> {
         this.baseView = baseView;
     }
 
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        //show progress bar
+        baseView.showProgressBar();
+    }
+
     @Override
     protected JokeBean doInBackground(Void...params) {
 
+        //get joke
         JokeBean jokeBean  = new JokeBean();
 
         if(jokeApiService == null) {
@@ -59,6 +68,9 @@ public class JokeEndpointsAsyncTask extends AsyncTask<Void, Void, JokeBean> {
 
     @Override
     protected void onPostExecute(JokeBean jokeBean) {
+
+        //get joke done, hide progress bar
+        baseView.hideProgressBar();
 
         if(null==jokeBean.getJokeData()) {
             baseView.showErrorMessage(jokeBean);
